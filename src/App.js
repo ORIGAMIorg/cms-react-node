@@ -4,31 +4,22 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
 } from "react-router-dom";
-import {ProvideAuth} from "./components/ProvideAuth";
+import { ProvideAuth } from "./components/ProvideAuth";
 import AuthStatus from "./components/AuthStatus";
 import PrivateRoute from "./components/PrivateRoute";
 import LoginView from "./components/LoginView";
 import PublicView from "./components/PublicView";
 import ProtectedView from "./components/ProtectedView";
+import Header from "./components/Header";
 
 export default function App() {
   return (
     <ProvideAuth>
       <Router>
         <div>
+          <Header/>
           <AuthStatus/>
-
-          <ul>
-            <li>
-              <Link to="/public">Public Page</Link>
-            </li>
-            <li>
-              <Link to="/protected">Protected Page</Link>
-            </li>
-          </ul>
-
           <Switch>
             <Route path="/public">
               <PublicView/>
