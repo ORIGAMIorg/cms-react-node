@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
 import {
   useHistory,
   useLocation
-} from "react-router-dom";
-import {useAuth} from "../components/ProvideAuth";
+} from 'react-router-dom';
+import { useAuth } from './ProvideAuth';
 
 export default function LoginView() {
-  let history = useHistory();
-  let location = useLocation();
-  let auth = useAuth();
+  const history = useHistory();
+  const location = useLocation();
+  const auth = useAuth();
 
-  let {from} = location.state || {from: {pathname: "/"}};
-  let login = () => {
+  const { from } = location.state || { from: { pathname: '/' } };
+  const login = () => {
     auth.signin(() => {
       history.replace(from);
     });
@@ -19,8 +19,12 @@ export default function LoginView() {
 
   return (
     <div>
-      <p>You must log in to view the page at {from.pathname}</p>
-      <button onClick={login}>Log in</button>
+      <p>
+        You must log in to view the page at
+        {' '}
+        {from.pathname}
+      </p>
+      <button type="button" onClick={login}>Log in</button>
     </div>
   );
 }

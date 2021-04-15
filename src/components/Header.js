@@ -1,20 +1,20 @@
-import React from "react";
-import {
-  Link,
-} from "react-router-dom";
-import {makeStyles} from '@material-ui/core/styles';
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import Typography from "@material-ui/core/Typography";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import AppBar from "@material-ui/core/AppBar";
+import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import clsx from "clsx";
-import ToolbarComponent from "./ToolbarComponent";
-import SidebarComponent from "./SidebarComponent";
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core/styles';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import MenuIcon from '@material-ui/icons/Menu';
+import clsx from 'clsx';
+import React from 'react';
+import {
+  Link
+} from 'react-router-dom';
+import SidebarComponent from './SidebarComponent';
+import ToolbarComponent from './ToolbarComponent';
 
 const drawerWidth = 240;
 
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
+  const [auth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openUserMenu = Boolean(anchorEl);
   const [openToolbar, setOpenToolbar] = React.useState(false);
@@ -102,7 +102,7 @@ export default function Header() {
               [classes.hide]: openToolbar,
             })}
           >
-            <MenuIcon/>
+            <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             <Link to="/public" className={classes.links}>
@@ -121,7 +121,7 @@ export default function Header() {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <AccountCircle/>
+                <AccountCircle />
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -146,8 +146,8 @@ export default function Header() {
           <Button onClick={toggleDrawer}>Sidebar</Button>
         </Toolbar>
       </AppBar>
-      <ToolbarComponent openToolbar={openToolbar} handleDrawerClose={handleDrawerClose}/>
-      <SidebarComponent openSidebar={openSidebar} handleSidebarClose={handleSidebarClose}/>
+      <ToolbarComponent openToolbar={openToolbar} handleDrawerClose={handleDrawerClose} />
+      <SidebarComponent openSidebar={openSidebar} handleSidebarClose={handleSidebarClose} />
     </>
-  )
+  );
 }

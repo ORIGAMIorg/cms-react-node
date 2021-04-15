@@ -1,34 +1,34 @@
-import "./App.css";
-import React from "react";
+import React from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
-} from "react-router-dom";
-import { ProvideAuth } from "./components/ProvideAuth";
-import AuthStatus from "./components/AuthStatus";
-import PrivateRoute from "./components/PrivateRoute";
-import LoginView from "./components/LoginView";
-import PublicView from "./components/PublicView";
-import ProtectedView from "./components/ProtectedView";
-import Header from "./components/Header";
+  Switch
+} from 'react-router-dom';
+import './App.css';
+import AuthStatus from './components/AuthStatus';
+import Header from './components/Header';
+import LoginView from './components/LoginView';
+import PrivateRoute from './components/PrivateRoute';
+import ProtectedView from './components/ProtectedView';
+import { ProvideAuth } from './components/ProvideAuth';
+import PublicView from './components/PublicView';
 
 export default function App() {
   return (
     <ProvideAuth>
       <Router>
         <div>
-          <Header/>
-          <AuthStatus/>
+          <Header />
+          <AuthStatus />
           <Switch>
             <Route path="/public">
-              <PublicView/>
+              <PublicView />
             </Route>
             <Route path="/login">
-              <LoginView/>
+              <LoginView />
             </Route>
             <PrivateRoute path="/protected">
-              <ProtectedView/>
+              <ProtectedView />
             </PrivateRoute>
           </Switch>
         </div>
@@ -36,4 +36,3 @@ export default function App() {
     </ProvideAuth>
   );
 }
-
