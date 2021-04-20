@@ -21,15 +21,15 @@ export default function App() {
           <Header />
           <AuthStatus />
           <Switch>
-            <Route path="/public">
-              <PublicView />
-            </Route>
             <Route path="/login">
               <LoginView />
             </Route>
-            <PrivateRoute path="/protected">
+            <PrivateRoute path="/edit">
               <ProtectedView />
             </PrivateRoute>
+            <Route path="/">
+              <PublicView />
+            </Route>
           </Switch>
         </div>
       </Router>
