@@ -1,12 +1,9 @@
 import AppBar from '@material-ui/core/AppBar';
 // import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
@@ -14,9 +11,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
 import React from 'react';
-import {
-  Link
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import SidebarComponent from './SidebarComponent';
 import ToolbarComponent from './ToolbarComponent';
 
@@ -60,13 +55,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Header() {
   const classes = useStyles();
   const [auth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const openUserMenu = Boolean(anchorEl);
   const [openToolbar, setOpenToolbar] = React.useState(false);
   const [openSidebar, setOpenSidebar] = React.useState(false);
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   // const handleEditPage = () => {
   //   console.log('handleEditPage');
@@ -79,10 +69,6 @@ export default function Header() {
   // const handleCancelEdit = () => {
   //   console.log('handleCancelEdit');
   // };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   const handleDrawerOpen = () => {
     setOpenToolbar(true);
@@ -143,34 +129,6 @@ export default function Header() {
               <Link to="/" className={classes.links}>
                 <SaveOutlinedIcon />
               </Link>
-
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={openUserMenu}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-              </Menu>
             </div>
           )}
           <IconButton color="inherit" onClick={toggleDrawer}>
@@ -178,8 +136,14 @@ export default function Header() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <ToolbarComponent openToolbar={openToolbar} handleDrawerClose={handleDrawerClose} />
-      <SidebarComponent openSidebar={openSidebar} handleSidebarClose={handleSidebarClose} />
+      <ToolbarComponent
+        openToolbar={openToolbar}
+        handleDrawerClose={handleDrawerClose}
+      />
+      <SidebarComponent
+        openSidebar={openSidebar}
+        handleSidebarClose={handleSidebarClose}
+      />
     </>
   );
 }

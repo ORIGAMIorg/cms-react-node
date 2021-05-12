@@ -11,8 +11,11 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MailIcon from '@material-ui/icons/Mail';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import clsx from 'clsx';
-import React from 'react';
+import React, { useState } from 'react';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const drawerWidth = 240;
 
@@ -57,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
+  currentUser: {
+    marginTop: 'auto',
+  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -66,6 +72,16 @@ const useStyles = makeStyles((theme) => ({
 export default function ToolbarComponent({ openToolbar, handleDrawerClose }) {
   const classes = useStyles();
   const theme = useTheme();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openUserMenu = Boolean(anchorEl);
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <div className={classes.root}>
@@ -85,7 +101,11 @@ export default function ToolbarComponent({ openToolbar, handleDrawerClose }) {
       >
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            {theme.direction === 'rtl' ? (
+              <ChevronRightIcon />
+            ) : (
+              <ChevronLeftIcon />
+            )}
           </IconButton>
         </div>
         <Divider />
@@ -98,11 +118,42 @@ export default function ToolbarComponent({ openToolbar, handleDrawerClose }) {
             'Revisions',
           ].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
+        <div className={classes.currentUser}>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleMenu}
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={openUserMenu}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleClose}>My account</MenuItem>
+          </Menu>
+        </div>
       </Drawer>
     </div>
   );
