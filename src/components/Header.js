@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header() {
+export default function Header(props) {
   const classes = useStyles();
   const [auth] = React.useState(true);
   const [openToolbar, setOpenToolbar] = React.useState(false);

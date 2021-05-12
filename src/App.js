@@ -21,15 +21,9 @@ export default function App() {
           <Header />
           <AuthStatus />
           <Switch>
-            <Route path="/login">
-              <LoginView />
-            </Route>
-            <PrivateRoute path="/edit">
-              <ProtectedView />
-            </PrivateRoute>
-            <Route path="/">
-              <PublicView />
-            </Route>
+            <Route path="/login" component={LoginView} />
+            <PrivateRoute path="/edit" childComponent={ProtectedView} />
+            <Route path="/" component={PublicView} />
           </Switch>
         </div>
       </Router>
