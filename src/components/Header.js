@@ -88,7 +88,7 @@ export default function Header(props) {
   };
 
   const editPath = location.pathname === '/' ? '/edit' : `${location.pathname}/edit`;
-  const closePath = location.pathname.slice(0, (location.pathname.length - 5));
+  const closePath = location.pathname.slice(0, location.pathname.length - 5);
 
   return (
     <>
@@ -120,19 +120,24 @@ export default function Header(props) {
           </Typography>
           {auth && (
             <div>
-              <Link
-                to={editPath}
-                className={classes.links}
-                aria-label="edit current page"
-              >
-                <EditOutlinedIcon />
-              </Link>
-              <Link to={closePath} className={classes.links}>
-                <CloseOutlinedIcon />
-              </Link>
-              <Link to="/" className={classes.links}>
-                <SaveOutlinedIcon />
-              </Link>
+              {location.pathname.indexOf('/edit') < 0 ? (
+                <Link
+                  to={editPath}
+                  className={classes.links}
+                  aria-label="edit current page"
+                >
+                  <EditOutlinedIcon />
+                </Link>
+              ) : (
+                <>
+                  <Link to={closePath} className={classes.links}>
+                    <CloseOutlinedIcon />
+                  </Link>
+                  <Link to="/" className={classes.links}>
+                    <SaveOutlinedIcon />
+                  </Link>
+                </>
+              )}
             </div>
           )}
           <IconButton color="inherit" onClick={toggleDrawer}>
