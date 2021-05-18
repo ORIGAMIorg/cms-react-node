@@ -11,7 +11,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import SidebarComponent from './SidebarComponent';
 import ToolbarComponent from './ToolbarComponent';
 
@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header(props) {
   const classes = useStyles();
+  const location = useLocation();
   const [auth] = React.useState(true);
   const [openToolbar, setOpenToolbar] = React.useState(false);
   const [openSidebar, setOpenSidebar] = React.useState(false);
@@ -86,6 +87,9 @@ export default function Header(props) {
     setOpenSidebar(!openSidebar);
   };
 
+  const editPath = location.pathname === '/' ? '/edit' : `${location.pathname}/edit`;
+  const closePath = location.pathname.slice(0, (location.pathname.length - 5));
+
   return (
     <>
       <AppBar
@@ -117,13 +121,13 @@ export default function Header(props) {
           {auth && (
             <div>
               <Link
-                to="/edit"
+                to={editPath}
                 className={classes.links}
                 aria-label="edit current page"
               >
                 <EditOutlinedIcon />
               </Link>
-              <Link to="/" className={classes.links}>
+              <Link to={closePath} className={classes.links}>
                 <CloseOutlinedIcon />
               </Link>
               <Link to="/" className={classes.links}>
