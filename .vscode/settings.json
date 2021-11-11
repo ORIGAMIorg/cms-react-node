@@ -1,3 +1,12 @@
 {
-  "editor.formatOnSave": true
+	"editor.formatOnSave": true,
+	"prettier.jsxSingleQuote": true,
+	"prettier.requireConfig": true,
+    "editor.codeActionsOnSave": {
+			"eslint.autoFixOnSave": true,
+			"source.fixAll.all": true,
+			"source.fixAll.eslint": true,
+			"source.organizeImports": false,
+			"jest.showCoverageOnLoad": true
+    },
 }
